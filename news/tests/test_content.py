@@ -87,5 +87,5 @@ class TestDetailPage(TestCase):
         self.client.force_login(self.author)
         response = self.client.get(self.detail_url)
         self.assertIn('form', response.context)
-        # Проверим, что объект формы соответствует нужному классу формы.
+        # Проверим,  что объект формы соответствует нужному классу формы.
         self.assertIsInstance(response.context['form'], CommentForm)
