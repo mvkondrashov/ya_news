@@ -15,9 +15,9 @@ from django.urls import reverse
         ('news:detail', pytest.lazy_fixture('id_for_args')),
         ('users:login', None),
         ('users:logout', None),
-        ('users:signup', None),        
+        ('users:signup', None),
     ),
-    
+
 )
 def test_pages_availability_for_anonymous_user(client, name, args):
     url = reverse(name, args=args)
