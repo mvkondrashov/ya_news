@@ -3,8 +3,8 @@ import pytest
 from django.conf import settings
 from django.test.client import Client
 from django.utils import timezone
-from datetime import datetime, timedelta
 
+from datetime import datetime, timedelta
 
 from news.models import Comment, News
 
@@ -44,7 +44,7 @@ def comment(author, news):
     comment = Comment.objects.create(
         news=news,
         author=author,
-        text='Comment'
+        text='Comment text'
     )
     return comment
 
@@ -59,8 +59,8 @@ def all_news():
     today = datetime.today()
     all_news = [
         News(
-            title=f'Новость {index}',
-            text='Просто текст.',
+            title=f'News {index}',
+            text='Text only',
             date=today - timedelta(days=index)
         )
         for index in range(settings.NEWS_COUNT_ON_HOME_PAGE + 1)
@@ -75,8 +75,18 @@ def all_comments(author, news):
     for index in range(10):
         # Создаём объект и записываем его в переменную.
         comment = Comment.objects.create(
-            news=news, author=author, text=f'Tекст {index}',
+            news=news, author=author, text=f'Text {index}',
         )
         comment.created = now + timedelta(days=index)
         # И сохраняем эти изменения.
         comment.save()
+
+
+@pytest.fixture
+def form_data():
+    return {'text': 'Comment text'}
+
+
+@pytest.fixture
+def new_form_data():
+    return {'text': 'New comment text'}

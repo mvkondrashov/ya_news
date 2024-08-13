@@ -27,8 +27,8 @@ def test_news_order(client, all_news):
 
 @pytest.mark.django_db
 def test_comments_order(client, news, all_comments):
-    detail_url = reverse('news:detail', args=(news.id,))
-    response = client.get(detail_url)
+    url = reverse('news:detail', args=(news.id,))
+    response = client.get(url)
 
     assert 'news' in response.context
 
